@@ -1,16 +1,26 @@
-import '../global.css';
-import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import HomeScreen from './screens/HomeScreen';
-import OrdersScreen from './screens/OrdersScreen';
+import React from 'react';
+import {StyleSheet} from 'react-native';
+import '../global.css';
 import RootStack from './stacks/RootStack';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import {
+  configureReanimatedLogger,
+  ReanimatedLogLevel,
+} from 'react-native-reanimated';
+
+// This is the default configuration
+configureReanimatedLogger({
+  level: ReanimatedLogLevel.warn,
+  strict: false, // Reanimated runs in strict mode by default
+});
 const App = () => {
   return (
-    <NavigationContainer>
-      <RootStack />
-    </NavigationContainer>
+    <GestureHandlerRootView style={{flex: 1}}>
+      <NavigationContainer>
+        <RootStack />
+      </NavigationContainer>
+    </GestureHandlerRootView>
   );
 };
 

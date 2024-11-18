@@ -8,6 +8,9 @@ import CategoriesTabs from './tabs/CategoriesTabs';
 import OrderTabs from './tabs/OrderTabs';
 import AccountsTabs from './tabs/AccountsTabs';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {HomeScreenIconSize, Theame} from '../constants/colorsTheams';
+import FontsAwsome from 'react-native-vector-icons/FontAwesome5';
+import ProductDetailsScreen from '../screens/ProductDetailsScreen';
 
 const RootStack = () => {
   const Stack = createNativeStackNavigator();
@@ -20,6 +23,11 @@ const RootStack = () => {
 
       <Stack.Screen name="Home" component={TabsStack} />
       {/* The Bellow includes All Screens which are not included in Tabs and thoes not have Tab bars in it  */}
+      <Stack.Screen
+        name="Details"
+        component={ProductDetailsScreen}
+        options={{title: 'Product Details'}}
+      />
       <Stack.Screen name="Orders" component={OrdersScreen} />
     </Stack.Navigator>
   );
@@ -28,11 +36,80 @@ const RootStack = () => {
 const TabsStack = () => {
   const Tabs = createBottomTabNavigator();
   return (
-    <Tabs.Navigator screenOptions={{headerShown: true}}>
-      <Tabs.Screen name="HomeTabs" component={HomeTabStack} />
-      <Tabs.Screen name="CategoriesTabs" component={CategoriesTabs} />
-      <Tabs.Screen name="OrderTabs" component={OrderTabs} />
-      <Tabs.Screen name="AccountsTabs" component={AccountsTabs} />
+    <Tabs.Navigator
+      screenOptions={{
+        headerShown: false,
+        tabBarActiveTintColor: Theame.lightprimary,
+        tabBarStyle: {
+          height: 60,
+          paddingBottom: 10,
+        },
+        tabBarLabelStyle: {
+          fontSize: 10,
+          fontFamily: 'OpenSans-SemiBold',
+        },
+      }}>
+      <Tabs.Screen
+        name="HomeTabs"
+        component={HomeTabStack}
+        options={{
+          headerShown: false,
+          title: 'Home',
+          tabBarIcon: ({focused}) => (
+            <FontsAwsome
+              name="home"
+              size={HomeScreenIconSize}
+              color={focused ? Theame.lightprimary : Theame.textSecondary}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="CategoriesTabs"
+        component={CategoriesTabs}
+        options={{
+          headerShown: false,
+          title: 'Categories',
+          tabBarIcon: ({focused}) => (
+            <FontsAwsome
+              name="vest"
+              size={HomeScreenIconSize}
+              color={focused ? Theame.lightprimary : Theame.textSecondary}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="OrderTabs"
+        component={OrderTabs}
+        options={{
+          headerShown: false,
+          title: 'My Orders',
+          tabBarIcon: ({focused}) => (
+            <FontsAwsome
+              name="box-open"
+              size={HomeScreenIconSize}
+              color={focused ? Theame.lightprimary : Theame.textSecondary}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="AccountsTabs"
+        component={AccountsTabs}
+        options={{
+          headerShown: false,
+          title: 'Account',
+
+          tabBarIcon: ({focused}) => (
+            <FontsAwsome
+              name="user"
+              size={HomeScreenIconSize}
+              color={focused ? Theame.lightprimary : Theame.textSecondary}
+            />
+          ),
+        }}
+      />
     </Tabs.Navigator>
   );
 };
